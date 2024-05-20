@@ -13,6 +13,7 @@
     "arg": "^5.0.2",
     "balanced-match": "^1.0.2",
     "binary-extensions": "^2.3.0",
+    "bootstrap-icons": "^1.11.3",
     "brace-expansion": "^2.0.1",
     "braces": "^3.0.2",
     "camelcase-css": "^2.0.1",
@@ -97,7 +98,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev" : "npx tailwindcss -i ./src/input.css -o ./public/css/output.css --watch"
+    "dev": "npx tailwindcss -i ./src/input.css -o ./public/css/output.css --watch"
   },
   "keywords": [],
   "author": "",

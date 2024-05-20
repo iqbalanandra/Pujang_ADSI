@@ -25,10 +25,15 @@
             <a class="text-white hover:underline w-4/6 hover:decoration-red-600 font-bold hover:w-2/6" href="#" id="signInLink">SIGN IN</a>
             <a class="text-white hover:underline hover:decoration-red-600 ml-[35%] font-bold" href="#" id="signUpLink">SIGN UP</a>
         </div>
-        <form action="#" class="text-center mt-[5%]" id="signInForm">
-            <input class="w-5/6 h-10 rounded-lg pl-2 mb-4 fa-solid fa-user " type="text" id="signinusername" name="signinusername" placeholder="Username"><br>
-            <input class="w-5/6 h-10 rounded-lg pl-2" type="password" id="signinpassword" name="signinpassword" placeholder="Password">
+        <!-- sign in -->
+        <form action="../check_login.php" method="POST" class="text-center mt-[5%]" id="signInForm">
+            <input class="w-5/6 h-10 rounded-lg pl-2 mb-4 fa-solid fa-user " type="text" id="signinusername" name="username" placeholder="Username"><br>
+            <input class="w-5/6 h-10 rounded-lg pl-2" type="password" id="signinpassword" name="password" placeholder="Password">
+
+            <button type="submit"
+            class="flex items-center justify-center text-white text-xl font-semibold border-none bg-red-600 w-2/3 h-10 rounded-3xl transition-all duration-200 hover:w-5/6"></button>
         </form>
+
         <form action="#" class="text-center mt-[5%]" id="signUpForm" style="display: none;">
             <input type="text" class="w-2/5 h-10 rounded-lg pl-2 mb-4 mx-1" id="signupUsername" name="signupUsername" placeholder="Name">
             <input type="text" class="w-2/5 h-10 rounded-lg pl-2 mb-4 mx-1" id="signupUsername" name="signupUsername" placeholder="Username">
@@ -47,9 +52,9 @@
             </label>
         </div>
         <div class="flex justify-center mt-5">
-            <a class="flex items-center justify-center text-white text-xl font-semibold border-none bg-red-600 w-2/3 h-10 rounded-3xl transition-all duration-200 hover:w-5/6" href="#" id="submitButton">
-                LOGIN
-            </a>
+            <button ty class="flex items-center justify-center text-white text-xl font-semibold border-none bg-red-600 w-2/3 h-10 rounded-3xl transition-all duration-200 hover:w-5/6">
+
+            </button>
         </div>
         <div class="flex justify-center mt-5">
             <a class="text-white" href="#" id="delateForgot">Forgot Password?</a>
