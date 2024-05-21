@@ -3,8 +3,12 @@ module.exports = {
   content: ['./public/**/*.{html,js}'],
   theme: {
     extend: {
+      backgroundImage: theme => ({
+        'quote-bg': "url(image/paper_texture.png')"
+      }),
       fontFamily: {
-        poppins: ['Poppins']
+        poppins: ['Poppins'],
+        caveat: ['Caveat']
       }
     },
   },
