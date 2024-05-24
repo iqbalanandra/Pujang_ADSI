@@ -8,7 +8,9 @@ module.exports = {
       }),
       fontFamily: {
         poppins: ['Poppins'],
-        caveat: ['Caveat']
+        caveat: ['Caveat'],
+        neuton: ['Neuton'],
+        sanchez: ['Sanchez']
       }
     },
   },
