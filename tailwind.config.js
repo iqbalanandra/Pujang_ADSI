@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./public/**/*.{html,js}'],
+  content: ['./public/**/*.{html,js,php}'],
   theme: {
     extend: {
       backgroundImage: theme => ({
@@ -10,7 +10,9 @@ module.exports = {
         poppins: ['Poppins'],
         caveat: ['Caveat'],
         neuton: ['Neuton'],
-        sanchez: ['Sanchez']
+        sanchez: ['Sanchez'],
+        robotoSlab: ['Roboto Slab'],
+        roboto: ['Roboto']
       }
     },
   },

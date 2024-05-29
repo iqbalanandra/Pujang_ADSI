@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -55,13 +56,19 @@
             /* Adjust color to match your design */
         }
 
-        .judul h1{
+        .judul h1 {
             font-size: medium;
             font-family: 'Neuton';
             padding: 1px;
         }
-
-        .author p{
+        .judul {
+        font-size: clamp(1rem, 2vw, 2rem);
+        line-height: 1.2; /* Adjust as needed */
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+        .author p {
             font-size: 16px;
             font-family: 'Neuton';
             font-weight: lighter;
@@ -72,9 +79,13 @@
             align-items: start;
         }
 
-        .book{
+        .book {
             flex: 0 0 auto;
             margin-right: 20px;
+        }
+
+        .deskripsi-content {
+            overflow-y: scroll;
         }
     </style>
 </head>
@@ -110,7 +121,7 @@
                 <div class="w-[200px] h-full flex items-center">
                     <span class="i-notifikasi"></span>
                     <img src="https://via.placeholder.com/54" alt="Dummy Image" class="w-14 h-14 rounded-full">
-                    <p>Iqbal anandra</p>
+                    <p><?php echo $_SESSION['nama'] ?></p>
                 </div>
             </div>
 
@@ -124,39 +135,45 @@
                         <div class="bg-blue-600 w-full h-[250px] flex justify-around">
                             <div class="container relative w-[700px] h-[250px] p-4">
                                 <!-- Background Quote -->
-                                <img src="../image/paper_texture.png" alt="Background Quote"
-                                    class="absolute z-0 inset-0 w-full h-full object-cover shadow-md rounded-md">
+                                <img src="../image/paper_texture.png" alt="Background Quote" class="absolute z-0 inset-0 w-full h-full object-cover shadow-md rounded-md">
                                 <!-- Quote Content -->
+                                <?php 
+                                include '../koneksi.php';
+                                include '../fetch_quote.php';
+                                 if ($result->num_rows > 0) {
+                                    ?>
                                 <div class="relative z-10 flex flex-col">
                                     <div class="w-full h-full mb-5">
                                         <h1 class="text-black text-2xl font-semibold">Today's Quote</h1>
                                     </div>
                                     <div class="w-full h-full">
-                                        <p class="text-black font-caveat text-[30px]">"Lorem ipsum dolor sit amet,
-                                            consectetur
-                                            adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus
-                                            diam. Sed
-                                            nisi."</p>
+                                        <p class="text-black font-caveat text-[30px]">"<?php echo htmlspecialchars($quotes['kutipan'])?>"</p>
                                     </div>
                                     <div class="w-full h-full mt-1">
-                                        <p class="text-black font-caveat text-[26px]">~Capek</p>
+                                        <p class="text-black font-caveat text-[26px]">~<?php echo htmlspecialchars($quotes['dikutip']) ?></p>
                                     </div>
                                 </div>
+                                <?php
+                                }
+                                ?>
                             </div>
                             <!-- Banner Container -->
+                            <?php 
+                                include '../banner.php';
+                            ?>
+
                             <div class="w-[250px] h-[250px] p-3 flex justify-center align-middle">
                                 <div class="flex w-full px-3 bg-slate-100 items-center rounded-xl">
-                                    <img class="static mr-1" src="https://placehold.co/100x176/png" alt="">
+                                    <img class="static mr-1 shadow-md" src="<?php echo $random_book['src_gambar']; ?>" alt="cover buku" style="width: 100px; height: 176px;">
                                     <!-- Banner Nav Container -->
                                     <div class="w-[119px] h-[176px] float-start">
-                                        <h1> Have you read 
-                                            The Hobbit by J.R.R Tolkien </h1>
-                                        <h1>4.5/5</h1>
+                                        <h1> Have you read
+                                        <?php echo $random_book['judul']; ?> by <?php echo $random_book['penulis']; ?> </h1>
                                         <a class=" flex items-center px-2 py-2 font-semibold text-[12px] bg-white text-black rounded-md shadow-sm hover:scale-110 ease-in-out duration-300" href="">Read Now <span class="i-open flex"></span></a>
                                     </div>
 
 
-                                  </div>
+                                </div>
                             </div>
                         </div>
                         <!-- Row 2 -->
@@ -195,20 +212,8 @@
                                 </div>
                             </div>
 
-                            <!-- book container -->
-                            <div class=" bg-slate-300 book w-[165px] h-auto p-1">
-                                <div class="cover-book">
-                                    <img src="https://placehold.co/160x246/png" alt="">
-                                </div>
-                                <!-- Judul Buku -->
-                                <div class="judul">
-                                    <h1>Working as Imbecile</h1>
-                                </div>
-                                <!-- Penulis Buku -->
-                                <div class="author">
-                                    <p>Adolf Hitler</p>
-                                </div>
-                            </div>
+
+
 
 
                         </div>
@@ -246,7 +251,6 @@
                                         <span class="i-genre"></span>
                                     </div>
                                 </div>
-
                                 <div class="">
                                     <h1>Thriller, Sci-fi, History, Autobiograph</h1>
                                 </div>
@@ -257,10 +261,120 @@
 
 
                 <!-- Content 2 / Row 4- -->
-                <div class="page-2 bg-purple-400 w-full h-[720px]"></div>
+                <div class="page-2 bg-purple-400 w-full h-auto flex flex-col px-6 ">
+                    <!-- Row 5 -->
+                    <!-- Book List -->
+                    <h1>Most Popular Books</h1>
+                    <div class="bg-cyan-700 w-full h-auto flex flex-wrap flex-row">
+                        <?php 
+                        include '../fetch_popular.php';
+
+                        foreach ($popular as $popular_book) { ?>
+                        <!-- Books -->
+                        <div class="container bg-white w-[286px] h-[391px] rounded-md m-4 mb-2 flex flex-col shadow-md box-border border border-black">
+                            <!-- Container Judul Buku -->
+                            <div class=" w-full h-auto flex flex-col text-center ">
+                                <h1 class="judul text-3xl font-neuton font-[500] align-text-bottom"><?php echo htmlspecialchars($popular_book['judul']); ?></h1>
+                                <h2 class="penulis text-lg font-neuton align-text-top text-[#868181]"><?php echo htmlspecialchars($popular_book['penulis']); ?></h2>
+                                <h3 class="genre text-sm font-sanchez align-text-top">Novel, History, Fiction</h3>
+                            </div>
+                            <!-- Container Row 2 List Buku -->
+                            <div class="deskripsi w-full h-auto flex">
+                                <img src="<?php echo htmlspecialchars($popular_book['src_gambar']); ?>" alt="cover Buku" style="width : 153px ; height256px">
+                                <!-- Container Deskripsi -->
+                                <div class="deskripsi ml-2 w-full h-[256px] overflow-y-scroll">
+                                    <p class=" text-sm"><?php echo htmlspecialchars($popular_book['deskripsi']); ?></p>
+                                </div>
+                            </div>
+                            <!-- Perintilan -->
+                            <div class="w-full flex justify-around text-sm mt-2">
+                                <p><span class="font-semibold">Published :</span> <?php echo htmlspecialchars($popular_book['published']); ?></p>
+                                <p><span class="font-semibold">Language :</span> <?php echo htmlspecialchars($popular_book['language']); ?></p>
+                            </div>
+                            <div class="w-full h-full flex justify-center text-sm">
+                                <p><span class="font-semibold">Publisher :</span> <?php echo htmlspecialchars($popular_book['publisher']); ?></p>
+                            </div>
+                        </div>
+                        <?php
+                        }
+                        ?>
+
+                    </div>
+
+                    <!-- Row 6 -->
+                    <h1>Newest Release</h1>
+                    <div class="bg-cyan-400 w-full h-auto flex flex-wrap flex-row">
+
+
+                        <?php include '../fetch_book.php';
+                        include '../koneksi.php';
+                        foreach ($books as $buku) { ?>
+                            <!-- Books -->
+                            <div class="container bg-white w-[286px] h-[391px] rounded-md m-4 mb-2 flex flex-col shadow-md box-border border border-black">
+                                <!-- Container Judul Buku -->
+                                <div class=" w-full h-auto flex flex-col text-center ">
+                                    <h1 class="judul text-3xl font-neuton font-[500] align-text-bottom"><?php echo htmlspecialchars($buku['judul']); ?></h1>
+                                    <h2 class="penulis text-lg font-neuton align-text-top text-[#868181]"><?php echo htmlspecialchars($buku['penulis']); ?></h2>
+                                    <h3 class="genre text-sm font-sanchez align-text-top">Novel, History, Fiction</h3>
+                                </div>
+                                <!-- Container Row 2 List Buku -->
+                                <div class="deskripsi w-full h-auto flex">
+                                    <img src="<?php echo htmlspecialchars($buku['src_gambar']); ?>" alt="cover Buku">
+                                    <!-- Container Deskripsi -->
+                                    <div class="deskripsi ml-2 w-full h-[256px] overflow-y-scroll">
+                                        <p class=" text-sm"> <?php echo htmlspecialchars($buku['deskripsi']); ?></p>
+                                    </div>
+                                </div>
+                                <!-- Perintilan -->
+                                <div class="w-full flex justify-around text-sm mt-2">
+                                    <p><span class="font-semibold">Published :</span> <?php echo htmlspecialchars($buku['published']); ?></p>
+                                    <p><span class="font-semibold">Language :</span> <?php echo htmlspecialchars($buku['language']); ?></p>
+                                </div>
+                                <div class="w-full h-full flex justify-center text-sm">
+                                    <p><span class="font-semibold">Publisher :</span> <?php echo htmlspecialchars($buku['publisher']); ?></p>
+                                </div>
+                            </div>
+                        <?php
+                        }
+                        ?>
+                    </div>
+                </div>     
             </div>
+
+            <!-- Footer -->
+            <div class="footer text-white bg-[#2C323D] w-full h-[205px] flex flex-col items-center p-4">
+                    <h1 class ="font-bold text-lg font-robotoSlab">PUJANG</h1>
+                    <!-- Links -->
+                    <div class=" w-[378px] flex justify-around font-roboto font-semibold mt-2 tracking-widest">
+                        <a href="">Home</a>
+                        <a href="">About</a>
+                        <a href="">Services</a>
+                        <a href="">Blog</a>
+                        <a href="">Contact</a>
+                    </div>
+                    <!-- Contacts Logo -->
+                    <div class="w-[155px] h-auto flex flex-row justify-around my-6">
+                        <div class="w-[43px] h-[43px] border border-white rounded-full flex justify-center items-center align-middle">
+                            <span class="i-facebook"></span>
+                        </div>
+
+                        <div class="w-[43px] h-[43px] border border-white rounded-full flex justify-center items-center align-middle">
+                            <span class="i-instagram"></span>
+                        </div>
+
+                        <div class="w-[43px] h-[43px] border border-white rounded-full flex justify-center items-center align-middle">
+                            <span class="i-linkedin"></span>
+                        </div>
+                    </div>
+
+                    <!-- Copyright -->
+                    <div class="w-[300px] flex justify-center font-roboto tracking-widest" h-auto>
+                        <p><span class="i-copyright"></span>2024 <span class="text-[#E6382D]">PUJANG</span>. All right reserved </p>
+                    </div>
+
+
+                </div>
         </div>
-    </div>
     </div>
 </body>
 
