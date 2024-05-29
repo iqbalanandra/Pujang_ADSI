@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function(){
     const signUpLink = document.getElementById('signUpLink');
     const signInLink = document.getElementById('signInLink');
     const signInForm = document.getElementById('signInForm');
@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
             signUpForm.style.display = 'block';
         }
     });
-
+    
     signInLink.addEventListener('click', function(event) {
         event.preventDefault(); 
         if (signUpForm) {
