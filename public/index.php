@@ -105,7 +105,7 @@
                 <span class="i-setting"></span>
                 <span class="i-ask"></span>
             </div>
-            <span class="i-exit"></span>
+            <a href="login.html"><span class="i-exit"></span></a>
         </div>
 
         <!-- Main Content -->
@@ -128,11 +128,11 @@
             <!-- Main-Content -->
             <div class="w-full pl-6 pr-6 mt-4">
                 <!-- Content 1 // Row 1-3 -->
-                <div class="page-1 bg-slate-800 w-full h-auto mt-4 flex">
+                <div class="page-1 w-full h-auto mt-4 flex">
                     <!-- Quote Container -->
-                    <div class="relative w-[1078px] h-[690px] p-6 gap-3 flex flex-col bg-green-400 z-0">
+                    <div class="relative w-[1078px] h-[690px] p-6 gap-3 flex flex-col z-0">
                         <!-- Row 1 -->
-                        <div class="bg-blue-600 w-full h-[250px] flex justify-around">
+                        <div class=" w-full h-[250px] flex justify-around">
                             <div class="container relative w-[700px] h-[250px] p-4">
                                 <!-- Background Quote -->
                                 <img src="../image/paper_texture.png" alt="Background Quote" class="absolute z-0 inset-0 w-full h-full object-cover shadow-md rounded-md">
@@ -147,7 +147,7 @@
                                         <h1 class="text-black text-2xl font-semibold">Today's Quote</h1>
                                     </div>
                                     <div class="w-full h-full">
-                                        <p class="text-black font-caveat text-[30px]">"<?php echo htmlspecialchars($quotes['kutipan'])?>"</p>
+                                        <p class="text-black font-caveat font-semibold text-[30px]">"<?php echo htmlspecialchars($quotes['kutipan'])?>"</p>
                                     </div>
                                     <div class="w-full h-full mt-1">
                                         <p class="text-black font-caveat text-[26px]">~<?php echo htmlspecialchars($quotes['dikutip']) ?></p>
@@ -163,13 +163,13 @@
                             ?>
 
                             <div class="w-[250px] h-[250px] p-3 flex justify-center align-middle">
-                                <div class="flex w-full px-3 bg-slate-100 items-center rounded-xl">
+                                <div class="flex w-full px-3 bg-white items-center rounded-xl">
                                     <img class="static mr-1 shadow-md" src="<?php echo $random_book['src_gambar']; ?>" alt="cover buku" style="width: 100px; height: 176px;">
                                     <!-- Banner Nav Container -->
                                     <div class="w-[119px] h-[176px] float-start">
-                                        <h1> Have you read
+                                        <h1 class ="text-sm"> Have you read
                                         <?php echo $random_book['judul']; ?> by <?php echo $random_book['penulis']; ?> </h1>
-                                        <a class=" flex items-center px-2 py-2 font-semibold text-[12px] bg-white text-black rounded-md shadow-sm hover:scale-110 ease-in-out duration-300" href="">Read Now <span class="i-open flex"></span></a>
+                                        <a class=" flex items-center px-2 py-2 font-semibold text-[12px] bg-[#EA3137] text-white rounded-md shadow-sm hover:scale-110 ease-in-out duration-300" href="">Read Now <span class="i-open flex"></span></a>
                                     </div>
 
 
@@ -178,10 +178,10 @@
                         </div>
                         <!-- Row 2 -->
                         <div class="w-full h-auto">
-                            <h1>Continue Reading</h1>
+                            <h1 class ="font-roboto text-xl font-semibold">Continue Reading</h1>
                         </div>
                         <!-- Row 3 -->
-                        <div class="bg-pink-400 w-[full] h-auto p-5 flex flex-row overflow-x-auto whitespace-nowrap">
+                        <div class=" w-[full] h-auto p-5 flex flex-row overflow-x-auto whitespace-nowrap">
                             <!-- book container -->
                             <div class=" bg-slate-300 book w-[165px] h-auto p-1">
                                 <div class="cover-book">
@@ -211,43 +211,40 @@
                                     <p>Adolf Hitler</p>
                                 </div>
                             </div>
-
-
-
 
 
                         </div>
                     </div>
 
-                    <div class="w-full h-[690px] bg-orange-300 p-4 static font-sanchez">
-                        <div class="bg-slate-400 w-full h-full flex flex-col items-center justify-around">
+                    <div class="w-full h-[690px] p-4 static font-sanchez">
+                        <div class=" w-full h-full flex flex-col items-center justify-around">
                             <!-- Books Read Count -->
-                            <div class="bg-slate-200 w-[258px] h-[160px] rounded-xl p-2 flex items-center">
-                                <div class="bg-green-300 w-[87px] h-[87px] rounded-full flex justify-center items-center mr-3">
+                            <div class="bg-white w-[258px] h-[160px] rounded-xl p-2 flex items-center">
+                                <div class=" w-[87px] h-[87px] rounded-full bg-[#65F662] flex justify-center items-center mr-3">
                                     <span class="i-book"></span>
                                 </div>
                                 <!-- Counter -->
-                                <div class="bg-lime-500 w-[118px] h-auto">
+                                <div class=" w-[118px] h-auto">
                                     <h1 class="text-[28px]">156</h1>
                                     <p class="text-[16px]">Books Read</p>
                                 </div>
                             </div>
                             <!-- Authors Count -->
-                            <div class="bg-slate-200 w-[258px] h-[160px] rounded-xl p-2 flex items-center">
-                                <div class="bg-blue-500 w-[87px] h-[87px] rounded-full flex justify-center items-center mr-3">
+                            <div class="bg-white w-[258px] h-[160px] rounded-xl p-2 flex items-center">
+                                <div class=" w-[87px] h-[87px] rounded-full bg-[#68A2F9] flex justify-center items-center mr-3">
                                     <span class="i-person"></span>
                                 </div>
                                 <!-- Counter -->
-                                <div class="bg-lime-500 w-[118px] h-auto">
+                                <div class=" w-[118px] h-auto">
                                     <h1 class="text-[28px]">79</h1>
                                     <p class="text-[16px]">Authors Read</p>
                                 </div>
                             </div>
                             <!-- Genre Preferences -->
-                            <div class="bg-slate-200 w-[258px] h-[160px] rounded-xl flex flex-col p-2 items-center">
-                                <div class="bg-indigo-300 w-full h-[59px] flex flex-row items-center justify-around">
+                            <div class="bg-white w-[258px] h-[160px] rounded-xl flex flex-col p-2 items-center">
+                                <div class=" w-full h-[59px] flex flex-row items-center justify-around">
                                     <h1 class=" font-poppins text-[16px] font-semibold w-[117px] h-[48px]">Genre Preferences</h1>
-                                    <div class="bg-purple-400 w-[59px] h-[59px] rounded-full flex justify-center items-center">
+                                    <div class=" w-[59px] h-[59px] bg-[#AE6FFF] rounded-full flex justify-center items-center">
                                         <span class="i-genre"></span>
                                     </div>
                                 </div>
@@ -261,11 +258,11 @@
 
 
                 <!-- Content 2 / Row 4- -->
-                <div class="page-2 bg-purple-400 w-full h-auto flex flex-col px-6 ">
+                <div class="page-2 w-full h-auto flex flex-col px-6 ">
                     <!-- Row 5 -->
                     <!-- Book List -->
-                    <h1>Most Popular Books</h1>
-                    <div class="bg-cyan-700 w-full h-auto flex flex-wrap flex-row">
+                    <h1 class ="font-roboto text-xl font-semibold">Most Popular Books</h1>
+                    <div class=" w-full h-auto flex flex-wrap flex-row">
                         <?php 
                         include '../fetch_popular.php';
 
@@ -302,8 +299,8 @@
                     </div>
 
                     <!-- Row 6 -->
-                    <h1>Newest Release</h1>
-                    <div class="bg-cyan-400 w-full h-auto flex flex-wrap flex-row">
+                    <h1 class ="font-roboto text-xl font-semibold">Newest Release</h1>
+                    <div class=" w-full h-auto flex flex-wrap flex-row">
 
 
                         <?php include '../fetch_book.php';
