@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tambah Buku</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<style>
+.input-overlap {
+    margin-left: -85%; 
+}
+.hover-grow-button:hover {
+    transform: scale(1.10); 
+    transition: transform 0.3s ease-in-out;
+}
+</style>
+<body class="bg-gray-200 flex items-center justify-center h-screen">
+    <!-- Kontainer utama dengan flex dan tinggi penuh layar -->
+    <div class="flex h-screen w-full">
+        <!-- Bagian gradient -->
+        <div class="bg-gradient-to-r from-black to-red-500 w-1/4 flex-shrink-0 relative"></div>   
+        <!-- Bagian konten -->
+        <div class="flex-1 bg-gray-200 flex items-center relative">
+            <div class="absolute left-0 ml-16"> 
+                <!-- Input file -->
+                <div class="bg-gray-300 w-64 h-80 rounded flex justify-center items-center shadow-lg input-overlap">
+                    <button></button><span class="text-4xl text-gray-500">+</span></button>
+                </div>
+            </div>
+            <!-- Bagian form -->
+            <div class="ml-40 w-full max-w-2xl mt-40">
+                <form action="#" method="POST">
+                    <div class="grid grid-cols-2 gap-4">
+                        <input type="text" name="isbn" placeholder="ISBN" class="p-2 border border-gray-300 rounded-lg bg-white" required>
+                        <input type="text" name="penulis" placeholder="Penulis" class="p-2 border border-gray-300 rounded-lg bg-white" required>
+                        <input type="text" name="judul_buku" placeholder="Judul Buku" class="p-2 border border-gray-300 rounded-lg bg-white" required>
+                        <input type="text" name="tahun_terbit" placeholder="Tahun Terbit" class="p-2 border border-gray-300 rounded-lg bg-white" required>
+                        <input type="text" name="penerbit" placeholder="Penerbit" class="p-2 border border-gray-300 rounded-lg bg-white" required>
+                        <input type="text" name="bahasa" placeholder="Bahasa" class="p-2 border border-gray-300 rounded-lg bg-white" required>
+                        <textarea name="deskripsi" placeholder="Deskripsi" class="col-span-2 p-2 border border-gray-300 rounded-lg w-64 bg-white h-32 mx-auto" required></textarea>
+                    </div>
+                    <div class="flex justify-between items-center mt-8">
+                        <button type="submit" class="bg-red-500 text-white py-2 px-4  flex justify-center items-center rounded-lg mx-auto mt-10">TAMBAH BUKU</button>
+                        <button type="button" onclick="history.back()" class="bg-red-500 text-white py-3 px-4  rounded-full mt-10 hover-grow-button">&#8592;</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
