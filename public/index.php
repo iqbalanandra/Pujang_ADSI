@@ -271,7 +271,9 @@
                         <div class="container bg-white w-[286px] h-[391px] rounded-md m-4 mb-2 flex flex-col shadow-md box-border border border-black">
                             <!-- Container Judul Buku -->
                             <div class=" w-full h-auto flex flex-col text-center ">
-                                <h1 class="judul text-3xl font-neuton font-[500] align-text-bottom"><?php echo htmlspecialchars($popular_book['judul']); ?></h1>
+                                <h1 class="judul text-3xl font-neuton font-[500] align-text-bottom">
+                                    <a href=""><?php echo htmlspecialchars($popular_book['judul']); ?></a>
+                                </h1>
                                 <h2 class="penulis text-lg font-neuton align-text-top text-[#868181]"><?php echo htmlspecialchars($popular_book['penulis']); ?></h2>
                                 <h3 class="genre text-sm font-sanchez align-text-top">Novel, History, Fiction</h3>
                             </div>
@@ -310,7 +312,11 @@
                             <div class="container bg-white w-[286px] h-[391px] rounded-md m-4 mb-2 flex flex-col shadow-md box-border border border-black">
                                 <!-- Container Judul Buku -->
                                 <div class=" w-full h-auto flex flex-col text-center ">
-                                    <h1 class="judul text-3xl font-neuton font-[500] align-text-bottom"><?php echo htmlspecialchars($buku['judul']); ?></h1>
+                                    <h1 class="judul text-3xl font-neuton font-[500] align-text-bottom hover:text-blue-500 duration-300">
+                                        <a href="book.php">
+                                            <?php echo htmlspecialchars($buku['judul']); ?>
+                                        </a>
+                                    </h1>
                                     <h2 class="penulis text-lg font-neuton align-text-top text-[#868181]"><?php echo htmlspecialchars($buku['penulis']); ?></h2>
                                     <h3 class="genre text-sm font-sanchez align-text-top">Novel, History, Fiction</h3>
                                 </div>
