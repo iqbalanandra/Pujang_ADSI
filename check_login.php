@@ -21,6 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['username'] = $data['username'];  // Store username
         $_SESSION['nama'] = $data['nama'];          // Store nama (assuming it's the name field)
         $_SESSION['level'] = $data['level'];
+        $_SESSION['id'] = $data['id'];
 
         switch ($data['level']) {
             case "admin":
