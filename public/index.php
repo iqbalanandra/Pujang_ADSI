@@ -103,10 +103,10 @@
             </div>
 
             <div class="h-[250px] flex flex-col items-center justify-around">
-                <span class="i-home"></span>
-                <span class="i-books"></span>
-                <span class="i-setting"></span>
-                <span class="i-ask"></span>
+                <a class="i-home" href="#" id="i-home"></a>
+                <a class="i-books" href="#" id="i-books"></a>
+                <a class="i-setting" href="#" id="i-setting"></a>
+                <a class="i-ask" href="#" id="i-ask"></a>
             </div>
             <a href="login.html"><span class="i-exit"></span></a>
         </div>
@@ -122,11 +122,11 @@
                 </div>
                 <!-- Profile -->
                 <div class="w-[200px] h-full flex items-center">
-                <span class="i-notifikasi"></span>
-                    <?php if(isset($_SESSION['src_profile']) && isset($_SESSION['nama'])): ?>
+                    <span class="i-notifikasi"></span>
+                    <?php if (isset($_SESSION['src_profile']) && isset($_SESSION['nama'])) : ?>
                         <img src="<?php echo htmlspecialchars($_SESSION['src_profile']); ?>" style="width:56px; height:56px" alt="Profile Image" class="rounded-full w-14 h-14">
                         <p><?php echo htmlspecialchars($_SESSION['nama']); ?></p>
-                    <?php else: ?>
+                    <?php else : ?>
                         <img src="https://via.placeholder.com/56" style="width:56px; height:56px" alt="Dummy Image" class="rounded-full w-14 h-14">
                         <p>Guest</p>
                     <?php endif; ?>
@@ -134,7 +134,7 @@
             </div>
 
             <!-- Main-Content -->
-            <div class="w-full pl-6 pr-6 mt-4">
+            <div id="paling-atas" class="w-full pl-6 pr-6 mt-4">
                 <!-- Content 1 // Row 1-3 -->
                 <div class="flex w-full h-auto mt-4 page-1">
                     <!-- Quote Container -->
@@ -212,13 +212,13 @@
                                     <div class="  <?php
                                                     if ($buku['status'] == 'Completed') {
                                                         echo 'bg-blue-500';
-                                                    }elseif ($buku['status'] == 'Dropped') {
+                                                    } elseif ($buku['status'] == 'Dropped') {
                                                         echo 'bg-red-500';
-                                                    }elseif ($buku['status'] == 'Plan to Read'){
+                                                    } elseif ($buku['status'] == 'Plan to Read') {
                                                         echo 'bg-gray-500';
-                                                    }elseif ($buku['status'] == 'On Hold'){
+                                                    } elseif ($buku['status'] == 'On Hold') {
                                                         echo 'bg-yellow-500';
-                                                    }elseif ($buku['status'] == 'Reading'){
+                                                    } elseif ($buku['status'] == 'Reading') {
                                                         echo 'bg-green-500';
                                                     } ?> 
                                                     w-fit h-auto p-1 text-white text-sm font-semibold rounded-md">
@@ -241,14 +241,14 @@
                                     <span class="i-book"></span>
                                 </div>
                                 <!-- Counter -->
-                                 <?php include '../count_buku.php'; ?>
+                                <?php include '../count_buku.php'; ?>
                                 <div class=" w-[118px] h-auto">
                                     <h1 class="text-[28px]"><?php echo $total_count; ?></h1>
                                     <p class="text-[16px]">Books Read</p>
                                 </div>
                             </div>
                             <!-- Authors Count -->
-                             <?php include '../count_author.php';?>
+                            <?php include '../count_author.php'; ?>
                             <div class="bg-white w-[258px] h-[160px] rounded-xl p-2 flex items-center">
                                 <div class=" w-[87px] h-[87px] rounded-full bg-[#68A2F9] flex justify-center items-center mr-3">
                                     <span class="i-person"></span>
@@ -290,9 +290,9 @@
                             <div class="container bg-white w-[286px] h-[391px] rounded-md m-4 mb-2 flex flex-col shadow-md box-border border border-black">
                                 <!-- Container Judul Buku -->
                                 <div class="flex flex-col w-full h-auto text-center ">
-                                        <a class="judul text-3xl font-neuton font-[500] align-text-bottom hover:text-blue-500 duration-300" href="book.php?ISBN=<?php echo $popular_book['ISBN'] ?>">
-                                            <?php echo htmlspecialchars($popular_book['judul']); ?>
-                                        </a>
+                                    <a class="judul text-3xl font-neuton font-[500] align-text-bottom hover:text-blue-500 duration-300" href="book.php?ISBN=<?php echo $popular_book['ISBN'] ?>">
+                                        <?php echo htmlspecialchars($popular_book['judul']); ?>
+                                    </a>
                                     <h2 class="penulis text-lg font-neuton align-text-top text-[#868181]"><?php echo htmlspecialchars($popular_book['penulis']); ?></h2>
                                     <h3 class="text-sm align-text-top genre font-sanchez">Novel, History, Fiction</h3>
                                 </div>
@@ -320,7 +320,7 @@
                     </div>
 
                     <!-- Row 6 -->
-                    <h1 class="text-xl font-semibold font-roboto leading-tight">Newest Release</h1>
+                    <h1 id="newest-release" class="text-xl font-semibold font-roboto leading-tight">Newest Release</h1>
                     <div class="flex flex-row flex-wrap w-full h-auto ">
 
 
@@ -376,7 +376,7 @@
                     <a href="">Contact</a>
                 </div>
                 <!-- Contacts Logo -->
-                <div class="w-[155px] h-auto flex flex-row justify-around my-6">
+                <div id="paling-bawah" class="w-[155px] h-auto flex flex-row justify-around my-6">
                     <div class="w-[43px] h-[43px] border border-white rounded-full flex justify-center items-center align-middle">
                         <span class="i-facebook"></span>
                     </div>
@@ -399,6 +399,30 @@
             </div>
         </div>
     </div>
+
+    <!-- Scroll by javascript -->
+    <script>
+                document.getElementById('i-books').addEventListener('click', function(event) {
+                    event.preventDefault();
+                    document.getElementById('newest-release').scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+
+                document.getElementById('i-home').addEventListener('click', function(event) {
+                    event.preventDefault();
+                    document.getElementById('paling-atas').scrollIntoView({
+                        behavior: 'smooth',
+                    });
+                });
+
+                document.getElementById('i-ask').addEventListener('click', function(event) {
+                    event.preventDefault();
+                    document.getElementById('paling-bawah').scrollIntoView({
+                        behavior: 'smooth',
+                    });
+                });
+            </script>
 </body>
 
 </html>
