@@ -169,7 +169,6 @@
                             <?php
                             include '../banner.php';
                             ?>
-
                             <div class="w-[250px] h-[250px] p-3 flex justify-center align-middle">
                                 <div class="flex items-center w-full px-3 bg-white rounded-xl">
                                     <img class="static mr-1 shadow-md" src="<?php echo $random_book['src_gambar']; ?>" alt="cover buku" style="width: 100px; height: 176px;">
