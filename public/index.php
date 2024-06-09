@@ -122,9 +122,14 @@
                 </div>
                 <!-- Profile -->
                 <div class="w-[200px] h-full flex items-center">
-                    <span class="i-notifikasi"></span>
-                    <img src="https://via.placeholder.com/54" alt="Dummy Image" class="rounded-full w-14 h-14">
-                    <p><?php echo $_SESSION['nama'] ?></p>
+                <span class="i-notifikasi"></span>
+                    <?php if(isset($_SESSION['src_profile']) && isset($_SESSION['nama'])): ?>
+                        <img src="<?php echo htmlspecialchars($_SESSION['src_profile']); ?>" style="width:56px; height:56px" alt="Profile Image" class="rounded-full w-14 h-14">
+                        <p><?php echo htmlspecialchars($_SESSION['nama']); ?></p>
+                    <?php else: ?>
+                        <img src="https://via.placeholder.com/56" style="width:56px; height:56px" alt="Dummy Image" class="rounded-full w-14 h-14">
+                        <p>Guest</p>
+                    <?php endif; ?>
                 </div>
             </div>
 
@@ -184,13 +189,13 @@
                             <h1 class="text-xl font-semibold font-roboto">Continue Reading</h1>
                         </div>
                         <!-- Row 3 -->
-                        <div class=" w-[full] h-auto p-5 flex flex-row overflow-x-auto whitespace-nowrap">
+                        <div class=" w-[full] h-auto p-5 flex flex-row overflow-x-auto whitespace-nowrap rounded-lg">
                             <!-- book container -->
                             <?php
                             include '../user_book.php';
 
                             foreach ($buku_pribadi as $buku) { ?>
-                                <div class=" bg-white book w-[165px] h-auto p-1 rounded-md drop-shadow-2xl">
+                                <div class=" bg-white book w-[165px] h-auto p-1 rounded-md">
                                     <div class="cover-book">
                                         <img style="width:160px ; height: 246px" src="<?php echo htmlspecialchars($buku['src_gambar']); ?>" alt="">
                                     </div>
@@ -237,19 +242,21 @@
                                     <span class="i-book"></span>
                                 </div>
                                 <!-- Counter -->
+                                 <?php include '../count_buku.php'; ?>
                                 <div class=" w-[118px] h-auto">
-                                    <h1 class="text-[28px]">156</h1>
+                                    <h1 class="text-[28px]"><?php echo $total_count; ?></h1>
                                     <p class="text-[16px]">Books Read</p>
                                 </div>
                             </div>
                             <!-- Authors Count -->
+                             <?php include '../count_author.php';?>
                             <div class="bg-white w-[258px] h-[160px] rounded-xl p-2 flex items-center">
                                 <div class=" w-[87px] h-[87px] rounded-full bg-[#68A2F9] flex justify-center items-center mr-3">
                                     <span class="i-person"></span>
                                 </div>
                                 <!-- Counter -->
                                 <div class=" w-[118px] h-auto">
-                                    <h1 class="text-[28px]">79</h1>
+                                    <h1 class="text-[28px]"><?php echo $total_authors; ?></h1>
                                     <p class="text-[16px]">Authors Read</p>
                                 </div>
                             </div>

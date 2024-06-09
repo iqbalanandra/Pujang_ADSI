@@ -19,9 +19,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $data = mysqli_fetch_assoc($login);
 
         $_SESSION['username'] = $data['username'];  // Store username
-        $_SESSION['nama'] = $data['nama'];          // Store nama (assuming it's the name field)
+        $_SESSION['nama'] = $data['nama'];          // Store nama
         $_SESSION['level'] = $data['level'];
         $_SESSION['id'] = $data['id'];
+        $_SESSION['src_profile'] = $data['src_profile'];
 
         switch ($data['level']) {
             case "admin":
