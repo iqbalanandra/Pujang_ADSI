@@ -96,8 +96,12 @@
                         </div>
 
                         <div class="flex items-center flex-grow w-full">
-                            <button class="bg-[#EA3137] w-[115px] h-[43px] rounded-lg text-white font-semibold mr-4 text-lg tracking-widest">Read</button>
-
+                            <!-- Tombol baca -->
+                            <!-- Form for "Read" button -->
+                            <form method="POST" action="../read_book.php">
+                                <input type="hidden" name="isbn" value="<?php echo $isbn; ?>">
+                                <button type="submit" class="bg-[#EA3137] w-[115px] h-[43px] rounded-lg text-white font-semibold mr-4 text-lg tracking-widest">Read</button>
+                            </form>
                             <!-- Form untuk insert status buku -->
                             <form action="../update_status.php" method="POST">
                                 <input type="hidden" name="ISBN" value="<?php echo $buku['ISBN']; ?>">
