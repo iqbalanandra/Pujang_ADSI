@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,7 +42,7 @@
         <div class="h-screen w-[428px] bg-gradient-to-r to-[#EA3137] from-[#2C323D] from-[-50px] fixed z-[-1]"></div>
 
         <!-- Header -->
-        <div class="w-full h-[80px] bg-slate-600 flex items-center justify-between">
+        <div class="w-full h-[80px] flex items-center justify-between">
             <!-- Container Search Bar -->
             <div class="mx-20 shadow-md search-bar">
                 <input type="text" name="Search" id="search">
@@ -51,8 +52,13 @@
             <!-- Profile -->
             <div class="w-[200px] h-full flex items-center mx-20">
                 <span class="i-notifikasi"></span>
-                <img src="https://via.placeholder.com/54" alt="Dummy Image" class="rounded-full w-14 h-14">
-                <p>Iqbal Anandra</p>
+                    <?php if (isset($_SESSION['src_profile']) && isset($_SESSION['nama'])) : ?>
+                        <img src="<?php echo htmlspecialchars($_SESSION['src_profile']); ?>" style="width:56px; height:56px" alt="Profile Image" class="rounded-full w-14 h-14">
+                        <p><?php echo htmlspecialchars($_SESSION['nama']); ?></p>
+                    <?php else : ?>
+                        <img src="https://via.placeholder.com/56" style="width:56px; height:56px" alt="Dummy Image" class="rounded-full w-14 h-14">
+                        <p>Guest</p>
+                    <?php endif; ?>
                 <span class="i-down"></span>
             </div>
         </div>
@@ -63,7 +69,6 @@
 
             <?php
             include "../koneksi.php";
-            session_start();
             $isbn = $_GET["ISBN"];
             $user_id = $_SESSION['id'];
 

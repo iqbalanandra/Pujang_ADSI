@@ -116,10 +116,13 @@
             <!-- Header -->
             <div class="w-full pl-6 pr-6 h-[80px] flex items-center justify-between sticky top-0 bg-body z-50">
                 <!-- Container Search Bar -->
-                <div class="shadow-md search-bar ">
-                    <input type="text" name="Search" id="search">
-                    <a href="#"><i class="fa-solid fa-magnifying-glass fa-lg"></i></a>
+                <div class="shadow-md search-bar flex items-center">
+                    <form class="w-full h-full" action="../search.php" method="GET">
+                        <input type="text" name="Search" id="search" class="flex w-full h-full p-2 border border-r-0 rounded-l-md">
+                        <button class="bg-gray-200 p-2 rounded-r-md" type="submit"><i class="fa-solid fa-magnifying-glass fa-lg"></i></button>
+                    </form>
                 </div>
+
                 <!-- Profile -->
                 <div class="w-[200px] h-full flex items-center">
                     <span class="i-notifikasi"></span>
@@ -402,27 +405,27 @@
 
     <!-- Scroll by javascript -->
     <script>
-                document.getElementById('i-books').addEventListener('click', function(event) {
-                    event.preventDefault();
-                    document.getElementById('newest-release').scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                });
+        document.getElementById('i-books').addEventListener('click', function(event) {
+            event.preventDefault();
+            document.getElementById('newest-release').scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
 
-                document.getElementById('i-home').addEventListener('click', function(event) {
-                    event.preventDefault();
-                    document.getElementById('paling-atas').scrollIntoView({
-                        behavior: 'smooth',
-                    });
-                });
+        document.getElementById('i-home').addEventListener('click', function(event) {
+            event.preventDefault();
+            document.getElementById('paling-atas').scrollIntoView({
+                behavior: 'smooth',
+            });
+        });
 
-                document.getElementById('i-ask').addEventListener('click', function(event) {
-                    event.preventDefault();
-                    document.getElementById('paling-bawah').scrollIntoView({
-                        behavior: 'smooth',
-                    });
-                });
-            </script>
+        document.getElementById('i-ask').addEventListener('click', function(event) {
+            event.preventDefault();
+            document.getElementById('paling-bawah').scrollIntoView({
+                behavior: 'smooth',
+            });
+        });
+    </script>
 </body>
 
 </html>
