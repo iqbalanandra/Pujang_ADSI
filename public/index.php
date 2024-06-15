@@ -99,7 +99,7 @@
         <!-- Sidebar -->
         <div class="p-2 overflow-y-auto sidebar">
             <div class="p-2.5 mt-1 flex items-center justify-center">
-                <img src="../image/logo pujang.png" alt="logo">
+                <img src="/PUJANG_ADSI/image/logo pujang.png" alt="logo">
             </div>
 
             <div class="h-[250px] flex flex-col items-center justify-around">
@@ -108,6 +108,7 @@
                 <a class="i-setting" href="#" id="i-setting"></a>
                 <a class="i-ask" href="#" id="i-ask"></a>
             </div>
+            <!-- Log Out -->
             <a href="login.html"><span class="i-exit"></span></a>
         </div>
 

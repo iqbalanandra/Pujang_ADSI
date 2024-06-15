@@ -1,5 +1,5 @@
 <?php
-include 'koneksi.php';
+include '../koneksi.php';
 
 $sql = "SELECT * FROM buku";
 $result = $koneksi->query($sql);

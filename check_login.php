@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         switch ($data['level']) {
             case "admin":
-                header("location:public/index.php");
+                header("location:public/adminkatalogiasibuku.php");
                 break;
             case "user":
                 header("location:public/index.php");
@@ -39,6 +39,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         header("location:public/login.html");
     }
 } else {
-    header("location:public/login.php");
+    header("location: /PUJANG_ADSI/public/login.html");
 }
 ?>

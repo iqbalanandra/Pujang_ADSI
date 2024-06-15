@@ -1,4 +1,20 @@
-<?php session_start(); ?>
+<?php
+session_start();
+include "../koneksi.php";
+$isbn = $_GET["ISBN"];
+$user_id = $_SESSION['id'];
+
+// Ambil data buku
+$sql_buku = "SELECT * FROM buku WHERE ISBN='$isbn'";
+$data_buku = mysqli_query($koneksi, $sql_buku);
+$buku = mysqli_fetch_array($data_buku);
+
+// Ambil status buku untuk user yang sudah login
+$sql_status = "SELECT status, is_favorite FROM user_buku WHERE ISBN='$isbn' AND id='$user_id'";
+$data_status = mysqli_query($koneksi, $sql_status);
+$status = mysqli_fetch_array($data_status);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,7 +23,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="css/output.css">
-
     <script src="https://kit.fontawesome.com/51f0e2cb62.js" crossorigin="anonymous"></script>
 </head>
 
@@ -34,6 +49,17 @@
         right: 1rem;
         color: #6b7280;
     }
+
+    .i-star::after {
+        display: block;
+        width: 30px;
+        height: 30px;
+        content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23ffffff' d='m12 17.27l4.15 2.51c.76.46 1.69-.22 1.49-1.08l-1.1-4.72l3.67-3.18c.67-.58.31-1.68-.57-1.75l-4.83-.41l-1.89-4.46c-.34-.81-1.5-.81-1.84 0L9.19 8.63l-4.83.41c-.88.07-1.24 1.17-.57 1.75l3.67 3.18l-1.1 4.72c-.2.86.73 1.54 1.49 1.08z'/%3E%3C/svg%3E");
+    }
+
+    .i-star.favorite::after {
+        content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23f2eb31' d='m12 17.27l4.15 2.51c.76.46 1.69-.22 1.49-1.08l-1.1-4.72l3.67-3.18c.67-.58.31-1.68-.57-1.75l-4.83-.41l-1.89-4.46c-.34-.81-1.5-.81-1.84 0L9.19 8.63l-4.83.41c-.88.07-1.24 1.17-.57 1.75l3.67 3.18l-1.1 4.72c-.2.86.73 1.54 1.49 1.08z'/%3E%3C/svg%3E");
+    }
 </style>
 
 <body class="bg-body">
@@ -52,13 +78,13 @@
             <!-- Profile -->
             <div class="w-[200px] h-full flex items-center mx-20">
                 <span class="i-notifikasi"></span>
-                    <?php if (isset($_SESSION['src_profile']) && isset($_SESSION['nama'])) : ?>
-                        <img src="<?php echo htmlspecialchars($_SESSION['src_profile']); ?>" style="width:56px; height:56px" alt="Profile Image" class="rounded-full w-14 h-14">
-                        <p><?php echo htmlspecialchars($_SESSION['nama']); ?></p>
-                    <?php else : ?>
-                        <img src="https://via.placeholder.com/56" style="width:56px; height:56px" alt="Dummy Image" class="rounded-full w-14 h-14">
-                        <p>Guest</p>
-                    <?php endif; ?>
+                <?php if (isset($_SESSION['src_profile']) && isset($_SESSION['nama'])) : ?>
+                    <img src="<?php echo htmlspecialchars($_SESSION['src_profile']); ?>" style="width:56px; height:56px" alt="Profile Image" class="rounded-full w-14 h-14">
+                    <p><?php echo htmlspecialchars($_SESSION['nama']); ?></p>
+                <?php else : ?>
+                    <img src="https://via.placeholder.com/56" style="width:56px; height:56px" alt="Dummy Image" class="rounded-full w-14 h-14">
+                    <p>Guest</p>
+                <?php endif; ?>
                 <span class="i-down"></span>
             </div>
         </div>
@@ -66,24 +92,7 @@
         <!-- Main Content -->
         <div class="flex items-center justify-center w-full h-screen relative">
             <!-- Content Container -->
-
-            <?php
-            include "../koneksi.php";
-            $isbn = $_GET["ISBN"];
-            $user_id = $_SESSION['id'];
-
-            // Ambil data buku
-            $sql_buku = "SELECT * FROM buku WHERE ISBN='$isbn'";
-            $data_buku = mysqli_query($koneksi, $sql_buku);
-            $buku = mysqli_fetch_array($data_buku);
-
-            // Ambil status buku untuk user yang sudah login
-            $sql_status = "SELECT status FROM user_buku WHERE ISBN='$isbn' AND id='$user_id'";
-            $data_status = mysqli_query($koneksi, $sql_status);
-            $status = mysqli_fetch_array($data_status);
-
-            if ($buku) {
-            ?>
+            <?php if ($buku) { ?>
                 <div class="w-[1005px] h-[607px] flex justify-center items-center gap-8 relative left-[-50px]">
                     <img style="width: 347px; height:545px;" src="<?php echo $buku["src_gambar"] ?>" alt="cover buku" class="drop-shadow-pekat">
 
@@ -93,7 +102,7 @@
                             <h1 class="text-[28px] text-[#868181] leading-[0.75]"><?php echo $buku["published"] ?></h1>
                             <h2 class="text-[42px] leading-[1.0]"><?php echo $buku["judul"] ?></h2>
                             <h3 class="text-[28px] text-[#868181] leading-tight"><?php echo $buku["penulis"] ?></h3>
-                            <h4 class="flex items-center text-[20px] font-roboto font-semibold"><span class="i-star"></span>8.6/10</h4>
+                            <h4 class="flex items-center text-[20px] font-roboto font-semibold">8.6/10</h4>
                         </div>
                         <!-- Deskripsi -->
                         <div class="w-full h-[288px] font-poppins text-md mt-3">
@@ -102,7 +111,6 @@
 
                         <div class="flex items-center flex-grow w-full">
                             <!-- Tombol baca -->
-                            <!-- Form for "Read" button -->
                             <form method="POST" action="../read_book.php">
                                 <input type="hidden" name="isbn" value="<?php echo $isbn; ?>">
                                 <button type="submit" class="bg-[#EA3137] w-[115px] h-[43px] rounded-lg text-white font-semibold mr-4 text-lg tracking-widest">Read</button>
@@ -117,17 +125,18 @@
                                     <option value="Completed" <?php if ($status && isset($status['status']) && $status['status'] == 'Completed') echo 'selected'; ?>>Completed</option>
                                     <option value="On Hold" <?php if ($status && isset($status['status']) && $status['status'] == 'On Hold') echo 'selected'; ?>>On Hold</option>
                                     <option value="Dropped" <?php if ($status && isset($status['status']) && $status['status'] == 'Dropped') echo 'selected'; ?>>Dropped</option>
-
                                 </select>
                             </form>
-                            <span class="i-star"></span>
+                            <!-- Favorite -->
+                            <form action="../favorite.php" method="POST" style="display: inline;">
+    <input type="hidden" name="isbn" value="<?php echo $buku['ISBN']; ?>">
+    <input type="hidden" name="user_id" value="<?php echo $_SESSION['id']; ?>">
+    <button type="submit" class="i-star <?php if ($status && isset($status['is_favorite']) && $status['is_favorite'] == 1) echo 'favorite'; ?>" style="border: none; background: none; cursor: pointer;"></button>
+</form>
                         </div>
                     </div>
                 </div>
-            <?php
-            }
-            ?>
-
+            <?php } ?>
             <!-- Tombol Back -->
             <a href="index.php">
                 <div class="h-[79px] w-[79px] bg-merah rounded-full flex justify-center items-center absolute bottom-0 right-0 m-4">
