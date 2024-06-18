@@ -1,5 +1,4 @@
 <?php
-
 include '../koneksi.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -10,17 +9,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $published = $_POST['published'];
     $language = $_POST['language'];
     $publisher = $_POST['publisher'];
-
-    // Untuk gambar cover
+    
+    // Handle cover image upload
     if ($_FILES['src_gambar']['name']) {
         $file_name = $_FILES['src_gambar']['name'];
         $file_tmp = $_FILES['src_gambar']['tmp_name'];
         
-        // Tentukan path untuk folder image dan image/cover
         $image_dir = '../image/';
         $cover_dir = '../image/cover/';
 
-        // Pastikan folder image tersedia, jika belum, buat folder tersebut
         if (!file_exists($image_dir)) {
             mkdir($image_dir, 0777, true);
         }
@@ -28,38 +25,43 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             mkdir($cover_dir, 0777, true);
         }
 
-        // Pindahkan file gambar ke folder image/cover
         $src_gambar = $cover_dir . basename($file_name);
         move_uploaded_file($file_tmp, $src_gambar);
     } else {
         $src_gambar = null;
     }
 
-    // Untuk konten buku (PDF)
+    // Handle content (PDF) upload
     if ($_FILES['src_konten']['name']) {
         $file_name = $_FILES['src_konten']['name'];
         $file_tmp = $_FILES['src_konten']['tmp_name'];
         $file_ext = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
 
-        // Tentukan path untuk folder konten_buku
         $konten_buku_dir = '../public/konten_buku/';
 
-        // Pastikan folder konten_buku tersedia, jika belum, buat folder tersebut
         if (!file_exists($konten_buku_dir)) {
             mkdir($konten_buku_dir, 0777, true);
         }
 
-        // Ubah nama file PDF menjadi ISBN.pdf
+        // New file name based on ISBN
         $nama_file_baru = $ISBN . '.pdf';
         $src_konten = $konten_buku_dir . $nama_file_baru;
 
-        // Pindahkan file PDF ke folder konten_buku
+        // Move uploaded file to content directory
         move_uploaded_file($file_tmp, $src_konten);
     } else {
         $src_konten = null;
     }
 
-    header("Location: adminkatalogiasibuku.php");
+    // Insert data into database
+    $sql = "INSERT INTO buku (ISBN, judul, penulis, deskripsi, src_gambar, published, language, publisher) 
+            VALUES ('$ISBN', '$judul', '$penulis', '$deskripsi', '$src_gambar', '$published', '$language', '$publisher')";
+
+    if ($koneksi->query($sql) === TRUE) {
+        header("Location: adminkatalogiasibuku.php");
+    } else {
+        echo "Error: " . $sql . "<br>" . $koneksi->error;
+    }
     exit();
 }
 ?>
@@ -76,7 +78,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             background-size: 10% 100%;
             background-repeat: no-repeat;
         }
-        
         .form-container {
             max-width: 500px;
             max-height: 80vh; 
@@ -124,10 +125,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <input type="file" name="src_gambar" class="border rounded w-full py-2 px-3">
             </div>
             <div class="mb-4">
-                <label class="block text-gray-700">Konten</label>
-                <input type="file" name="src_konten" class="border rounded w-full py-2 px-3">
-            </div>
-            <div class="mb-4">
                 <label class="block text-gray-700">Tahun Terbit</label>
                 <input type="text" name="published" class="border rounded w-full py-2 px-3">
             </div>
@@ -148,12 +145,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </button>            
                 <a href="adminkatalogiasibuku.php" class="flex items-center mt-4 text-blue-500 hover:underline">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
                     </svg>
-                        Kembali
-                    </a>
-                </div>
-            </form>
-        </div>
-    </body>
-    </html>
+                    Kembali
+                </a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
