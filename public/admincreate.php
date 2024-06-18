@@ -76,6 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             background-size: 10% 100%;
             background-repeat: no-repeat;
         }
+        
         .form-container {
             max-width: 500px;
             max-height: 80vh; 
