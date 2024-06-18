@@ -90,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <input type="file" name="src_gambar" class="border rounded w-full py-2 px-3">
             </div>
             <div class="mb-4">
-                <label class="block text-gray-700">Tanggal Terbit</label>
+                <label class="block text-gray-700">Tahun Terbit</label>
                 <input type="text" name="published" class="border rounded w-full py-2 px-3">
             </div>
             <div class="mb-4">
