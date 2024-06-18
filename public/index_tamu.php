@@ -120,7 +120,7 @@
                 <div class="shadow-md search-bar flex items-center">
                     <form class="w-full h-full" action="../search.php" method="GET">
                         <input type="text" name="Search" id="search" class="flex w-full h-full p-2 border border-r-0 rounded-l-md">
-                        <button class="bg-gray-200 p-2 rounded-r-md" type="submit"><i class="fa-solid fa-magnifying-glass fa-lg"></i></button>
+                        <button class="bg-gray-200 p-2 rounded-r-md" type="submit"><i class="fa-solid fa-magnifying-glass fa-lg top-6"></i></button>
                     </form>
                 </div>
 
