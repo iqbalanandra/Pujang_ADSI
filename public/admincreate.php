@@ -12,12 +12,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $publisher = $_POST['publisher'];
 
     if ($_FILES['src_gambar']['name']) {
-        $src_gambar = '../image/cover/' . basename($_FILES['src_gambar']['name']);
-        move_uploaded_file($_FILES['src_gambar']['tmp_name'], '../image/cover' . $src_gambar);
+        $file_name = $_FILES['src_gambar']['name'];
+        $file_tmp = $_FILES['src_gambar']['tmp_name'];
+        
+        // Tentukan path untuk folder image dan image/cover
+        $image_dir = '../image/';
+        $cover_dir = '../image/cover/';
+
+        // Pastikan folder image tersedia, jika belum, buat folder tersebut
+        if (!file_exists($image_dir)) {
+            mkdir($image_dir, 0777, true);
+        }
+        if (!file_exists($cover_dir)) {
+            mkdir($cover_dir, 0777, true);
+        }
+
+        // Pindahkan file gambar ke folder image/cover
+        $src_gambar = $cover_dir . basename($file_name);
+        move_uploaded_file($file_tmp, $src_gambar);
     } else {
         $src_gambar = null;
     }
 
+    // Masukkan data buku ke database
     $sql = "INSERT INTO buku (ISBN, judul, penulis, deskripsi, src_gambar, published, language, publisher) 
             VALUES ('$ISBN', '$judul', '$penulis', '$deskripsi', '$src_gambar', '$published', '$language', '$publisher')";
 
@@ -28,7 +45,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,7 +58,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             background-size: 10% 100%;
             background-repeat: no-repeat;
         }
-
         .form-container {
             max-width: 500px;
             max-height: 80vh; 
@@ -54,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             background-color: white; 
         }
-        .tambah-buku{
+        .tambah-buku {
             position: -webkit-sticky;
             position: sticky;
             top: 0;
@@ -108,12 +123,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </svg>
                     Simpan
                 </button>            
-           <a href="adminkatalogiasibuku.php" class="flex items-center mt-4 text-blue-500 hover:underline">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
-            </svg>
-            Kembali
-        </a>
+                <a href="adminkatalogiasibuku.php" class="flex items-center mt-4 text-blue-500 hover:underline">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                    </svg>
+                    Kembali
+                </a>
             </div>
         </form>
     </div>
