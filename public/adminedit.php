@@ -12,11 +12,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $src_gambar = $_POST['existing_src_gambar'];
 
     if ($_FILES['src_gambar']['name']) {
-        $src_gambar = '../image/cover/' . basename($_FILES['src_gambar']['name']);
-        move_uploaded_file($_FILES['src_gambar']['tmp_name'], '../' . $src_gambar);
+        // Tentukan path untuk folder image dan image/cover
+        $image_dir = '../image/';
+        $cover_dir = '../image/cover/';
+
+        // Pastikan folder image tersedia, jika belum, buat folder tersebut
+        if (!file_exists($image_dir)) {
+            mkdir($image_dir, 0777, true);
+        }
+        if (!file_exists($cover_dir)) {
+            mkdir($cover_dir, 0777, true);
+        }
+
+        // Pindahkan file gambar ke folder image/cover
+        $src_gambar = $cover_dir . basename($_FILES['src_gambar']['name']);
+        move_uploaded_file($_FILES['src_gambar']['tmp_name'], $src_gambar);
     }
 
-    $sql = "UPDATE buku SET  judul='$judul',  penulis='$penulis',  deskripsi='$deskripsi', src_gambar='$src_gambar', published='$published', language='$language', publisher='$publisher' WHERE ISBN='$ISBN'";
+    $sql = "UPDATE buku SET judul='$judul', penulis='$penulis', deskripsi='$deskripsi', src_gambar='$src_gambar', published='$published', language='$language', publisher='$publisher' WHERE ISBN='$ISBN'";
 
     if ($koneksi->query($sql) === TRUE) {
         header("Location: adminkatalogiasibuku.php");
@@ -92,7 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <img src="<?php echo $row['src_gambar']; ?>" alt="Gambar Buku" class="w-16 h-16">
                 </div>
                 <div class="mb-4">
-                    <label class="block text-gray-700">Tahun Terbit</label>
+                    <label class="block text-gray-700">Terbit</label>
                     <input type="text" name="published" class="border rounded w-full py-2 px-3" value="<?php echo $row['published']; ?>">
                 </div>
                 <div class="mb-4">

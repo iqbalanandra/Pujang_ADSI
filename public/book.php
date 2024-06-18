@@ -129,10 +129,10 @@ $status = mysqli_fetch_array($data_status);
                             </form>
                             <!-- Favorite -->
                             <form action="../favorite.php" method="POST" style="display: inline;">
-    <input type="hidden" name="isbn" value="<?php echo $buku['ISBN']; ?>">
-    <input type="hidden" name="user_id" value="<?php echo $_SESSION['id']; ?>">
-    <button type="submit" class="i-star <?php if ($status && isset($status['is_favorite']) && $status['is_favorite'] == 1) echo 'favorite'; ?>" style="border: none; background: none; cursor: pointer;"></button>
-</form>
+                                <input type="hidden" name="isbn" value="<?php echo $buku['ISBN']; ?>">
+                                <input type="hidden" name="user_id" value="<?php echo $_SESSION['id']; ?>">
+                                <button type="submit" class="i-star <?php if ($status && isset($status['is_favorite']) && $status['is_favorite'] == 1) echo 'favorite'; ?>" style="border: none; background: none; cursor: pointer;"></button>
+                            </form>
                         </div>
                     </div>
                 </div>
