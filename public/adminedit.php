@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $src_gambar = $_POST['existing_src_gambar'];
 
     if ($_FILES['src_gambar']['name']) {
-        $src_gambar = '..images/cover' . basename($_FILES['src_gambar']['name']);
+        $src_gambar = '../image/cover/' . basename($_FILES['src_gambar']['name']);
         move_uploaded_file($_FILES['src_gambar']['tmp_name'], '../' . $src_gambar);
     }
 

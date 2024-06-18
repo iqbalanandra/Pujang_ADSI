@@ -31,6 +31,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             case "user":
                 header("location:public/index.php");
                 break;
+            case "guest":
+                header("location:public/index_tamu.php");
             default:
                 $error_message = "Level user tidak dikenal.";
         }

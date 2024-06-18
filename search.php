@@ -22,7 +22,7 @@ if (isset($_GET['Search'])) {
 <html lang="en">
 
 <head>
-<script src="https://kit.fontawesome.com/51f0e2cb62.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/51f0e2cb62.js" crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search Results</title>
@@ -31,7 +31,6 @@ if (isset($_GET['Search'])) {
         .search-bar button i {
             color: #6b7280;
         }
-        
     </style>
 </head>
 
@@ -61,9 +60,9 @@ if (isset($_GET['Search'])) {
         <!-- Search Results -->
         <div class="flex-grow p-6">
             <h2 class="text-2xl font-semibold mb-4">Search Results for "<?php echo htmlspecialchars($searchQuery); ?>"</h2>
-            <?php if ($result->num_rows > 0): ?>
+            <?php if ($result->num_rows > 0) : ?>
                 <div class="space-y-4">
-                    <?php while ($row = $result->fetch_assoc()): ?>
+                    <?php while ($row = $result->fetch_assoc()) : ?>
                         <div class="p-4 bg-white shadow rounded-lg">
                             <h3 class="text-xl font-bold hover:text-blue-500 ease-linear duration-200"><a href="public/book.php?ISBN=<?php echo htmlspecialchars($row['ISBN']); ?>"><?php echo htmlspecialchars($row['judul']); ?></a></h3>
                             <p class="text-gray-700"><strong>Author:</strong> <?php echo htmlspecialchars($row['penulis']); ?></p>
@@ -74,44 +73,44 @@ if (isset($_GET['Search'])) {
                         </div>
                     <?php endwhile; ?>
                 </div>
-            <?php else: ?>
+            <?php else : ?>
                 <p class="text-gray-700">No results found for your search query.</p>
             <?php endif; ?>
         </div>
 
-            <!-- Footer -->
-            <div class="footer text-white bg-[#2C323D] w-full h-[205px] flex flex-col items-center p-4">
-                <h1 class="text-lg font-bold font-robotoSlab">PUJANG</h1>
-                <!-- Links -->
-                <div class=" w-[378px] flex justify-around font-roboto font-semibold mt-2 tracking-widest">
-                    <a href="">Home</a>
-                    <a href="">About</a>
-                    <a href="">Services</a>
-                    <a href="">Blog</a>
-                    <a href="">Contact</a>
-                </div>
-                <!-- Contacts Logo -->
-                <div id="paling-bawah" class="w-[155px] h-auto flex flex-row justify-around my-6">
-                    <div class="w-[43px] h-[43px] border border-white rounded-full flex justify-center items-center align-middle">
-                        <span class="i-facebook"></span>
-                    </div>
-
-                    <div class="w-[43px] h-[43px] border border-white rounded-full flex justify-center items-center align-middle">
-                        <span class="i-instagram"></span>
-                    </div>
-
-                    <div class="w-[43px] h-[43px] border border-white rounded-full flex justify-center items-center align-middle">
-                        <span class="i-linkedin"></span>
-                    </div>
-                </div>
-
-                <!-- Copyright -->
-                <div class="w-[300px] flex justify-center font-roboto tracking-widest" h-auto>
-                    <p><span class="i-copyright"></span>2024 <span class="text-[#E6382D]">PUJANG</span>. All right reserved </p>
-                </div>
-
-
+        <!-- Footer -->
+        <div class="footer text-white bg-[#2C323D] w-full h-[205px] flex flex-col items-center p-4">
+            <h1 class="text-lg font-bold font-robotoSlab">PUJANG</h1>
+            <!-- Links -->
+            <div class=" w-[378px] flex justify-around font-roboto font-semibold mt-2 tracking-widest">
+                <a href="">Home</a>
+                <a href="">About</a>
+                <a href="">Services</a>
+                <a href="">Blog</a>
+                <a href="">Contact</a>
             </div>
+            <!-- Contacts Logo -->
+            <div id="paling-bawah" class="w-[155px] h-auto flex flex-row justify-around my-6">
+                <div class="w-[43px] h-[43px] border border-white rounded-full flex justify-center items-center align-middle">
+                    <span class="i-facebook"></span>
+                </div>
+
+                <div class="w-[43px] h-[43px] border border-white rounded-full flex justify-center items-center align-middle">
+                    <span class="i-instagram"></span>
+                </div>
+
+                <div class="w-[43px] h-[43px] border border-white rounded-full flex justify-center items-center align-middle">
+                    <span class="i-linkedin"></span>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="w-[300px] flex justify-center font-roboto tracking-widest" h-auto>
+                <p><span class="i-copyright"></span>2024 <span class="text-[#E6382D]">PUJANG</span>. All right reserved </p>
+            </div>
+
+
+        </div>
     </div>
 </body>
 
