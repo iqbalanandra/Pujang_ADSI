@@ -11,6 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $language = $_POST['language'];
     $publisher = $_POST['publisher'];
 
+    // Untuk gambar cover
     if ($_FILES['src_gambar']['name']) {
         $file_name = $_FILES['src_gambar']['name'];
         $file_tmp = $_FILES['src_gambar']['tmp_name'];
@@ -34,15 +35,32 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $src_gambar = null;
     }
 
-    // Masukkan data buku ke database
-    $sql = "INSERT INTO buku (ISBN, judul, penulis, deskripsi, src_gambar, published, language, publisher) 
-            VALUES ('$ISBN', '$judul', '$penulis', '$deskripsi', '$src_gambar', '$published', '$language', '$publisher')";
+    // Untuk konten buku (PDF)
+    if ($_FILES['src_konten']['name']) {
+        $file_name = $_FILES['src_konten']['name'];
+        $file_tmp = $_FILES['src_konten']['tmp_name'];
+        $file_ext = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
 
-    if ($koneksi->query($sql) === TRUE) {
-        header("Location: adminkatalogiasibuku.php");
+        // Tentukan path untuk folder konten_buku
+        $konten_buku_dir = '../public/konten_buku/';
+
+        // Pastikan folder konten_buku tersedia, jika belum, buat folder tersebut
+        if (!file_exists($konten_buku_dir)) {
+            mkdir($konten_buku_dir, 0777, true);
+        }
+
+        // Ubah nama file PDF menjadi ISBN.pdf
+        $nama_file_baru = $ISBN . '.pdf';
+        $src_konten = $konten_buku_dir . $nama_file_baru;
+
+        // Pindahkan file PDF ke folder konten_buku
+        move_uploaded_file($file_tmp, $src_konten);
     } else {
-        echo "Error: " . $sql . "<br>" . $koneksi->error;
+        $src_konten = null;
     }
+
+    header("Location: adminkatalogiasibuku.php");
+    exit();
 }
 ?>
 <!DOCTYPE html>
@@ -105,6 +123,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <input type="file" name="src_gambar" class="border rounded w-full py-2 px-3">
             </div>
             <div class="mb-4">
+                <label class="block text-gray-700">Konten</label>
+                <input type="file" name="src_konten" class="border rounded w-full py-2 px-3">
+            </div>
+            <div class="mb-4">
                 <label class="block text-gray-700">Tahun Terbit</label>
                 <input type="text" name="published" class="border rounded w-full py-2 px-3">
             </div>
@@ -125,12 +147,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </button>            
                 <a href="adminkatalogiasibuku.php" class="flex items-center mt-4 text-blue-500 hover:underline">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7">
                     </svg>
-                    Kembali
-                </a>
-            </div>
-        </form>
-    </div>
-</body>
-</html>
+                        Kembali
+                    </a>
+                </div>
+            </form>
+        </div>
+    </body>
+    </html>
