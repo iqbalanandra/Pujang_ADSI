@@ -63,9 +63,20 @@ $result = $koneksi->query($sql);
         .action-buttons svg {
             margin-right: 0.5rem;
         }
+        .data-exit{
+            position: absolute;
+            top: 10px;
+            right: 8px;
+        }
     </style>
 </head>
 <body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <a href="login.html" class="data-exit bg-red-500 text-white p-2 rounded-full inline-flex items-center justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3-10a1 1 0 10-2 0v2a1 1 0 002 0V8zm-1 6a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" clip-rule="evenodd"/>
+        </svg>
+        Exit
+    </a>
     <div class="container mx-auto p-4 table-container border rounded-lg shadow-lg bg-white">
         <h1 class="h1-daftar text-2xl font-bold mb-4 text-center">Daftar Buku</h1>
         <div class="text-right mb-6">
@@ -80,7 +91,7 @@ $result = $koneksi->query($sql);
                         <th class="py-2 px-3 border">Penulis</th>
                         <th class="py-2 px-3 border">Deskripsi</th>
                         <th class="py-2 px-3 border">Gambar</th>
-                        <th class="py-2 px-3 border">Tahun Terbit</th>
+                        <th class="py-2 px-3 border">Terbit</th>
                         <th class="py-2 px-3 border">Bahasa</th>
                         <th class="py-2 px-3 border">Penerbit</th>
                         <th class="py-2 px-3 border">Aksi</th>
