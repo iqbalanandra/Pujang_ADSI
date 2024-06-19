@@ -121,7 +121,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <textarea name="deskripsi" class="border rounded w-full py-2 px-3"></textarea>
             </div>
             <div class="mb-4">
-                <label class="block text-gray-700">Gambar Cover</label>
+                <label class="block text-gray-700">Gambar</label>
                 <input type="file" name="src_gambar" class="border rounded w-full py-2 px-3">
             </div>
             <div class="mb-4">
