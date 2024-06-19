@@ -1,5 +1,4 @@
 <?php
-
 include '../koneksi.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -10,16 +9,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $published = $_POST['published'];
     $language = $_POST['language'];
     $publisher = $_POST['publisher'];
-
+    
+    // Handle cover image upload
     if ($_FILES['src_gambar']['name']) {
         $file_name = $_FILES['src_gambar']['name'];
         $file_tmp = $_FILES['src_gambar']['tmp_name'];
         
-        // Tentukan path untuk folder image dan image/cover
         $image_dir = '../image/';
         $cover_dir = '../image/cover/';
 
-        // Pastikan folder image tersedia, jika belum, buat folder tersebut
         if (!file_exists($image_dir)) {
             mkdir($image_dir, 0777, true);
         }
@@ -27,14 +25,35 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             mkdir($cover_dir, 0777, true);
         }
 
-        // Pindahkan file gambar ke folder image/cover
         $src_gambar = $cover_dir . basename($file_name);
         move_uploaded_file($file_tmp, $src_gambar);
     } else {
         $src_gambar = null;
     }
 
-    // Masukkan data buku ke database
+    // Handle content (PDF) upload
+    if ($_FILES['src_konten']['name']) {
+        $file_name = $_FILES['src_konten']['name'];
+        $file_tmp = $_FILES['src_konten']['tmp_name'];
+        $file_ext = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
+
+        $konten_buku_dir = '../public/konten_buku/';
+
+        if (!file_exists($konten_buku_dir)) {
+            mkdir($konten_buku_dir, 0777, true);
+        }
+
+        // New file name based on ISBN
+        $nama_file_baru = $ISBN . '.pdf';
+        $src_konten = $konten_buku_dir . $nama_file_baru;
+
+        // Move uploaded file to content directory
+        move_uploaded_file($file_tmp, $src_konten);
+    } else {
+        $src_konten = null;
+    }
+
+    // Insert data into database
     $sql = "INSERT INTO buku (ISBN, judul, penulis, deskripsi, src_gambar, published, language, publisher) 
             VALUES ('$ISBN', '$judul', '$penulis', '$deskripsi', '$src_gambar', '$published', '$language', '$publisher')";
 
@@ -43,6 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } else {
         echo "Error: " . $sql . "<br>" . $koneksi->error;
     }
+    exit();
 }
 ?>
 <!DOCTYPE html>
