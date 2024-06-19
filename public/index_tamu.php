@@ -200,7 +200,7 @@
                             <div class="container bg-white w-[286px] h-[391px] rounded-md m-4 mb-2 flex flex-col shadow-md box-border border border-black">
                                 <!-- Container Judul Buku -->
                                 <div class="flex flex-col w-full h-auto text-center ">
-                                    <a class="judul text-3xl font-neuton font-[500] align-text-bottom hover:text-blue-500 duration-300" href="book.php?ISBN=<?php echo $popular_book['ISBN'] ?>">
+                                    <a class="judul text-3xl font-neuton font-[500] align-text-bottom hover:text-blue-500 duration-300" href="book_tamu.php?ISBN=<?php echo $popular_book['ISBN'] ?>">
                                         <?php echo htmlspecialchars($popular_book['judul']); ?>
                                     </a>
                                     <h2 class="penulis text-lg font-neuton align-text-top text-[#868181]"><?php echo htmlspecialchars($popular_book['penulis']); ?></h2>
@@ -243,7 +243,7 @@
                                 <!-- Container Judul Buku -->
                                 <div class="flex flex-col w-full h-auto text-center ">
                                     <h1 class="judul text-3xl font-neuton font-[500] align-text-bottom hover:text-blue-500 duration-300">
-                                        <a href="book.php?ISBN=<?php echo $buku['ISBN'] ?>">
+                                        <a href="book_tamu.php?ISBN=<?php echo $buku['ISBN'] ?>">
                                             <?php echo htmlspecialchars($buku['judul']); ?>
                                         </a>
                                     </h1>
