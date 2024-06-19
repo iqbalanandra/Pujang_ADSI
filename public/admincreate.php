@@ -121,8 +121,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <textarea name="deskripsi" class="border rounded w-full py-2 px-3"></textarea>
             </div>
             <div class="mb-4">
-                <label class="block text-gray-700">Gambar</label>
+                <label class="block text-gray-700">Gambar Cover</label>
                 <input type="file" name="src_gambar" class="border rounded w-full py-2 px-3">
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700">Konten</label>
+                <input type="file" name="src_konten" class="border rounded w-full py-2 px-3">
             </div>
             <div class="mb-4">
                 <label class="block text-gray-700">Tahun Terbit</label>
@@ -145,12 +149,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </button>            
                 <a href="adminkatalogiasibuku.php" class="flex items-center mt-4 text-blue-500 hover:underline">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7">
                     </svg>
-                    Kembali
-                </a>
-            </div>
-        </form>
-    </div>
-</body>
-</html>
+                        Kembali
+                    </a>
+                </div>
+            </form>
+        </div>
+    </body>
+    </html>
